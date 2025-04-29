@@ -127,6 +127,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'model-changing' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/models-changes/changes.log'),
+            'days' => env('LOG_DAILY_DAYS', 7),
+            'ignore_exceptions' => true,
+        ]
+
     ],
 
 ];

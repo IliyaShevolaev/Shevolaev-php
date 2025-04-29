@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Posts\CommentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Users\UserController;
-use App\Models\Post\Comment;
+
 Route::get('/', function () {
     return view('layouts.app');
 });
