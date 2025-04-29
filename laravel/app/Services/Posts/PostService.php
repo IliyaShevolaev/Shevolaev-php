@@ -5,6 +5,7 @@ namespace App\Services\Posts;
 use App\Models\Post\Post;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PostService
 {
@@ -20,14 +21,28 @@ class PostService
 
     public function store(array $postData): Post
     {
+        $image = $postData['image'];
+        unset($postData['image']);
+
+        $post = Post::create($postData);
+        $post->addMedia($image)->toMediaCollection('posts-images');
+
         Log::channel('model-changing')->info('New post was created with data:' . json_encode($postData));
-        
-        return Post::create($postData);
+
+        return $post;
     }
 
     public function update(array $newPostData, Post $post): Post
     {
         Log::channel('model-changing')->info('Post was updated: ' . json_encode($post->toArray()) . ' to new data: ' . json_encode($newPostData));
+
+        if (isset($newPostData['image'])) {
+            $image = $newPostData['image'];
+            unset($newPostData['image']);
+
+            $post->getMedia('posts-images')->last()->delete();
+            $post->addMedia($image)->toMediaCollection('posts-images');
+        }
 
         $post->update($newPostData);
 

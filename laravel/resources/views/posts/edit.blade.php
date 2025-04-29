@@ -3,7 +3,7 @@
 <h1>Edit post</h1>
 
 <div class="container w-50">
-    <form action="{{route('posts.update', $post->id)}}" method="POST">
+    <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -13,6 +13,11 @@
         <div class="form-group">
             <label>Content</label>
             <textarea name="content" class="form-control" rows="3">{{$post->content}}</textarea>
+        </div>
+        <div class="form-group">
+            <div class="mt-3"> <img src="{{ $post->getImageUrl() }}"> </div>
+            <label class="form-label">Image</label>
+            <input name="image" class="form-control" type="file" id="formFile">
         </div>
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>

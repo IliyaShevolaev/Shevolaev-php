@@ -3,7 +3,7 @@
 <h1>Create post</h1>
 
 <div class="container w-50">
-    <form action="{{route('posts.store')}}" method="POST">
+    <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label>Name</label>
@@ -17,7 +17,11 @@
             <label>user_id</label>
             <input name="user_id" type="number" class="form-control" placeholder="Enter id">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <div class="form-group">
+            <label class="form-label">Image</label>
+            <input name="image" class="form-control" type="file" id="formFile">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
     </form>
 </div>
 @endsection

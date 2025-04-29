@@ -6,6 +6,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center">
             <div class="card w-50 mb-5">
+                <img src="{{ $post->getImageUrl() }}" class="card-img-top">
                 <div class="card-header">
                     <h2>{{$post->name}}</h2>
                 </div>
