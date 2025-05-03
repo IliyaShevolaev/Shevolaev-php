@@ -21,6 +21,14 @@
             <label>Confirm password</label>
             <input name="password_confirmation" type="password" class="form-control" placeholder="Password">
         </div>
+        <div class="form-group">
+            <label>Role:</label>
+            <select name="role" class="form-select">
+                @foreach (config('roles.roles') as $key => $role)
+                    <option {{$key == $userRoleName ? 'selected' : ''}} value="{{$key}}">{{$key}}</option> 
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>

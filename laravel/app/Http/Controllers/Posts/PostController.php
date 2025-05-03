@@ -8,11 +8,14 @@ use App\Services\Posts\PostService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\StoreRequest;
 use App\Http\Requests\Posts\UpdateRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
+
     private $postService;
 
     public function __construct(PostService $postService)
@@ -65,6 +68,8 @@ class PostController extends Controller
      */
     public function edit(Post $post): View
     {
+        $this->authorize('edit posts');
+
         return view('posts.edit', compact('post'));
     }
 

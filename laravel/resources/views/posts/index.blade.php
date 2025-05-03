@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <h1>Posts</h1>
+@can('add posts')
 <a href="{{route('posts.create')}}" class="btn btn-success">+</a>
+@endcan
 
 <div class="container mt-5">
     @foreach ($allPosts as $post)

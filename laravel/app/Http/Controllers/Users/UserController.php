@@ -53,7 +53,9 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('users.edit', compact('user'));
+        $userRoleName = $user->getUserRoleName();
+        
+        return view('users.edit', compact('user', 'userRoleName'));
     }
 
     /**

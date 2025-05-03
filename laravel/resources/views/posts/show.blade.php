@@ -11,7 +11,10 @@
             </div>
             <div class="card-body">
                 <p class="card-text">{{$post->content}}</p>
+
+                @can('edit posts', $post)
                 <a href="{{route('posts.edit', $post->id)}}" class="btn btn-warning">Edit post</a>
+                @endcan
 
                 <p class="card-text">Comments:</p>
                 <ul class="list-group list-group-flush">

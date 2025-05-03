@@ -5,14 +5,17 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post\Post;
 use App\Models\Post\Comment;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,13 +51,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts()
+    public function posts() : HasMany
     {
         return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
-    public function comments()
+    public function comments() : HasMany
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function getUserRoleName() 
+    {
+        return $this->roles[0]->name;
     }
 }

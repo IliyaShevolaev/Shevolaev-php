@@ -11,7 +11,8 @@
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <input name="email" type="email" class="form-control" aria-describedby="emailHelp"
+                placeholder="Enter email">
         </div>
         <div class="form-group">
             <label>Password</label>
@@ -21,7 +22,16 @@
             <label>Confirm password</label>
             <input name="password_confirmation" type="password" class="form-control" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <div class="form-group">
+            <label>Role</label>
+            <select name="role" class="form-select">
+                @foreach (config('roles.roles') as $key => $role)
+                    <option value="{{$key}}">{{$key}}</option> 
+                @endforeach
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
     </form>
 </div>
 @endsection
