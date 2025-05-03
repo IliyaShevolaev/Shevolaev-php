@@ -4,6 +4,7 @@ namespace App\Services\Posts;
 
 use App\Models\Post\Post;
 use App\Models\Post\Comment;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CommentService
@@ -14,7 +15,7 @@ class CommentService
 
         return Comment::create([
             'content' => $commentData['content'],
-            'user_id' => $commentData['user_id'],
+            'user_id' => Auth::id(),
             'post_id' => $post->id,
         ]);
     }

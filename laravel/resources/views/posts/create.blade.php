@@ -14,10 +14,6 @@
             <textarea name="content" class="form-control" rows="3"></textarea>
         </div>
         <div class="form-group">
-            <label>user_id</label>
-            <input name="user_id" type="number" class="form-control" placeholder="Enter id">
-        </div>
-        <div class="form-group">
             <label class="form-label">Image</label>
             <input name="image" class="form-control" type="file" id="formFile">
         </div>

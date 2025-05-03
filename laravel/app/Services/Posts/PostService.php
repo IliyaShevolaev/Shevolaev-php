@@ -4,6 +4,7 @@ namespace App\Services\Posts;
 
 use App\Models\Post\Post;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -21,6 +22,8 @@ class PostService
 
     public function store(array $postData): Post
     {
+        $postData['user_id'] = Auth::id();
+
         $image = $postData['image'];
         unset($postData['image']);
 

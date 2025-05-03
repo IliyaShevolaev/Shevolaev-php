@@ -23,10 +23,6 @@
             <label>Content</label>
             <textarea name="content" class="form-control" rows="3"></textarea>
         </div>
-        <div class="form-group">
-            <label>user_id</label>
-            <input name="user_id" type="number" class="form-control" placeholder="Enter id">
-        </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
