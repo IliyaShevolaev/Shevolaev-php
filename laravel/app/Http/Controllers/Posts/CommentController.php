@@ -11,7 +11,6 @@ use Illuminate\View\View;
 
 class CommentController extends Controller
 {
-
     private $commentService;
 
     public function __construct(CommentService $commentService)
@@ -24,6 +23,8 @@ class CommentController extends Controller
      */
     public function create(Post $post): View
     {
+        $this->authorize('add comments');
+
         return view('comments.create', compact('post'));
     }
 
@@ -32,6 +33,8 @@ class CommentController extends Controller
      */
     public function store(StoreRequest $storeRequest, Post $post): RedirectResponse
     {
+        $this->authorize('add comments');
+
         $commentData = $storeRequest->validated();
 
         $this->commentService->store($commentData, $post);

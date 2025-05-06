@@ -24,7 +24,10 @@ class UserController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('view users');
+
         $allUsersData = $this->userService->all();
+
         return view('users.index', compact('allUsersData'));
     }
 
@@ -33,6 +36,8 @@ class UserController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('add users');
+
         return view('users.create');
     }
 
@@ -41,6 +46,8 @@ class UserController extends Controller
      */
     public function store(StoreRequest $storeRequest): RedirectResponse
     {
+        $this->authorize('add users');
+
         $userData = $storeRequest->validated();
 
         $this->userService->store($userData);
@@ -53,6 +60,8 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
+        $this->authorize('edit users');
+
         $userRoleName = $user->getUserRoleName();
         
         return view('users.edit', compact('user', 'userRoleName'));
@@ -63,6 +72,8 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $updateRequest, User $user): RedirectResponse
     {
+        $this->authorize('edit users');
+
         $userData = $updateRequest->validated();
 
         $this->userService->update($userData, $user);

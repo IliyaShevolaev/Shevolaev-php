@@ -28,6 +28,8 @@ class PostController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('view posts');
+
         $allPosts = $this->postService->all();
 
         return view('posts.index', compact('allPosts'));
@@ -38,6 +40,8 @@ class PostController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('add posts');
+
         return view('posts.create');
     }
 
@@ -46,6 +50,8 @@ class PostController extends Controller
      */
     public function store(StoreRequest $storeRequest): RedirectResponse
     {
+        $this->authorize('add posts');
+
         $postData = $storeRequest->validated();
 
         $createdPost = $this->postService->store($postData);
@@ -58,6 +64,8 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
+        $this->authorize('view posts');
+
         $postComments = $this->postService->comments($post);
 
         return view('posts.show', compact('post', 'postComments'));
@@ -78,6 +86,8 @@ class PostController extends Controller
      */
     public function update(UpdateRequest $updateRequest, Post $post): RedirectResponse
     {
+        $this->authorize('edit posts');
+
         $postData = $updateRequest->validated();
 
         $this->postService->update($postData, $post);

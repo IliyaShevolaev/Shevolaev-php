@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\Post\PostSeeder;
+use Database\Seeders\Post\CommentSeeder;
+use Database\Seeders\User\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([RolesSeeder::class]);
+        $this->call([
+            RolesSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
+            UserSeeder::class,
+        ]);
     }
 }
