@@ -6,7 +6,6 @@ use App\Models\Post\Post;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PostService
 {

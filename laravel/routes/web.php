@@ -1,12 +1,10 @@
 <?php
 
-use App\Models\Post\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Posts\CommentController;
-use App\Models\Post\Comment;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -24,7 +22,3 @@ Route::group(['prefix' => 'comments', 'as' => 'comments.'], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/test', function () {
-    dd(Comment::factory()->make());
-});
