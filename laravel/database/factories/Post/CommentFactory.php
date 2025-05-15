@@ -18,9 +18,11 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::inRandomOrder()->first() ?? User::factory()->create();
+
         return [
             'content' => $this->faker->sentence(),
-            'user_id' => User::factory(),
+            'user_id' => $user,
             'post_id' => Post::factory(),
         ];
     }

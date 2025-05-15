@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Posts;
 
 use App\Models\Post\Post;
-use Illuminate\Http\Request;
 use App\Services\Posts\PostService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\StoreRequest;
 use App\Http\Requests\Posts\UpdateRequest;
+use App\Http\Resources\Post\PostResource;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -32,7 +32,9 @@ class PostController extends Controller
 
         $allPosts = $this->postService->all();
 
-        return view('posts.index', compact('allPosts'));
+        return view('posts.index', [
+            'posts' => PostResource::collection($allPosts)->resolve(),
+        ]);
     }
 
     /**
@@ -66,9 +68,9 @@ class PostController extends Controller
     {
         $this->authorize('view posts');
 
-        $postComments = $this->postService->comments($post);
-
-        return view('posts.show', compact('post', 'postComments'));
+        return view('posts.show', [
+            'post' => (new PostResource($post))->resolve(),
+        ]);
     }
 
     /**
@@ -78,7 +80,10 @@ class PostController extends Controller
     {
         $this->authorize('edit posts');
 
-        return view('posts.edit', compact('post'));
+        //return view('posts.edit', compact('post'));
+        return view('posts.edit', [
+            'post' => (new PostResource($post))->resolve(),
+        ]);
     }
 
     /**

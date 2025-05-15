@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Post\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\Post\PostResource;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Posts\CommentController;
@@ -22,3 +24,7 @@ Route::group(['prefix' => 'comments', 'as' => 'comments.'], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/test', function () {
+    dd(PostResource::collection(Post::all())->resolve());
+});

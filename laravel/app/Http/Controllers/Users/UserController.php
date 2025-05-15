@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Users\StoreRequest;
 use App\Http\Requests\Users\UpdateRequest;
+use App\Http\Resources\User\UserResource;
 
 class UserController extends Controller
 {
@@ -26,9 +27,11 @@ class UserController extends Controller
     {
         $this->authorize('view users');
 
-        $allUsersData = $this->userService->all();
+        $allUsers = $this->userService->all();
 
-        return view('users.index', compact('allUsersData'));
+        return view('users.index', [
+            'users' => UserResource::collection($allUsers)->resolve(),
+        ]);
     }
 
     /**
@@ -62,9 +65,9 @@ class UserController extends Controller
     {
         $this->authorize('edit users');
 
-        $userRoleName = $user->getUserRoleName();
-        
-        return view('users.edit', compact('user', 'userRoleName'));
+        return view('users.edit', [
+            'user' => (new UserResource($user))->resolve(),
+        ]);
     }
 
     /**

@@ -10,19 +10,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($allUsersData as $userData)
+        @foreach ($users as $user)
         <tr>
-            <th scope="row">{{$userData->id}}</th>
-            <td>{{$userData->name}}</td>
-            <td>{{$userData->email}}</td>
-            <td>
-                @foreach ($userData->roles as $role)
-                <span>{{ $role->name }}</span>
-                @endforeach
-            </td>
+            <th scope="row">{{$user['id']}}</th>
+            <td>{{$user['name']}}</td>
+            <td>{{$user['email']}}</td>
+            <td>{{$user['role']}}</td>
             <td>
                 @can('edit users')
-                <a href="{{route('users.edit', $userData->id)}}" class="btn btn-warning">Edit</a>
+                <a href="{{route('users.edit', $user['id'])}}" class="btn btn-warning">Edit</a>
                 @endcan
             </td>
         </tr>
