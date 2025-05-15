@@ -61,7 +61,7 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 
-    public function getUserRoleName() : string
+    public function getUserRoleNameAttribute() : string
     {
         return $this->roles[0]->name;
     }

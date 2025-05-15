@@ -80,7 +80,6 @@ class PostController extends Controller
     {
         $this->authorize('edit posts');
 
-        //return view('posts.edit', compact('post'));
         return view('posts.edit', [
             'post' => (new PostResource($post))->resolve(),
         ]);
