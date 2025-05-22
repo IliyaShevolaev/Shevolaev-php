@@ -2,10 +2,11 @@
 
 namespace App\Services\Posts;
 
+use App\Jobs\CreatePostEmailSendJob;
 use App\Models\Post\Post;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PostService
 {
@@ -27,7 +28,10 @@ class PostService
         unset($postData['image']);
 
         $post = Post::create($postData);
+
         $post->addMedia($image)->toMediaCollection('posts-images');
+
+        CreatePostEmailSendJob::dispatch($post, Auth::user());
 
         Log::channel('model-changing')->info('New post was created with data:' . json_encode($postData));
 
