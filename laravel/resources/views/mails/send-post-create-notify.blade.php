@@ -9,5 +9,6 @@
 <body>
     <h1>Вы создали Пост - {{$post->name}}</h1>
     <p>{{$post->content}}</p>
+    <p>Ссылка на пост: {{config('app.url') . '/posts/' . $post->id}}</p>
 </body>
 </html>
